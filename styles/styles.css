@@ -1,0 +1,126 @@
+:root {
+    /* Color scheme */
+    --background: #f9f9f9;
+    --card-bg: #ffffff;
+    --tile-text: #000000;
+    --subtext: #555555;
+    --body-text: #333333;
+    --accent: #3b82f6;
+    --card-border: #eaeaea;
+
+    /* Typography */
+    --title: 24px;
+    --section-header: 20px;
+    --movie-title: 14px;
+    --description: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "Roboto", "Helvetica", sans-serif;
+}
+
+#main {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 16px;
+    width: 700px;
+}
+
+#container > .heading {
+    display: flex;
+    color: var(--body-text);
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 12px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+#container > .card-body > .content {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fit, 1fr);
+    padding: 12px;
+}
+
+.content > .card {
+    display: flex;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card > img {
+    height: 200px;
+}
+
+.card-body > .body-title {
+    padding: 12px;
+    color: var(--body-text);
+}
+
+.content > .card > .card-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    color: var(--body-text);
+}
+
+.card-info > h2 {
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.card-info > .year {
+    font-weight: 500;
+    color: var(--subtext);
+}
+
+.card-info > p + p {
+    font-size: 18px;
+}
+
+input[type="search"] {
+    background-color: #f3f3f3;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    padding: 8px 8px;
+    width: 250px;
+    font-family: "Font Awesome 5 Free", Arial, serif;
+}
+
+.card-info > .btn {
+    border: none;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.btn-active {
+    background-color: #0aad02;
+}
+
+.btn-default {
+    background-color: #ff2525;
+}
+
+.btn-delete {
+   background-color: rgb(43, 138, 232);
+    color: #ffffff;
+}
