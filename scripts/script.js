@@ -3,10 +3,7 @@
 const watchedMovies = [];
 const unwatchedMovies = [];
 
-const movies = [
-    ...watchedMovies,
-    ...unwatchedMovies
-];
+const movies = [];
 
 function Movie(title, director, year, genre, desc, watched) {
     this.id = crypto.randomUUID();
@@ -22,25 +19,25 @@ Movie.prototype.setWatched = function() {
     this.watched = !this.watched;
 }
 
-function addMovie() {
+function addMovie(movies) {
     const form = document.querySelector('form');
-    const submit = document.querySelector('.submit-btn');
+    const submit = document.querySelector('#add');
     const formData = new FormData(form, submit);
     const movie = new Movie();
 
     if (!submit) return;
 
     for (const [key, val] of formData) {
-        if (key !== 'genre' || key !== 'director' || key !== 'status') // Temporary conditional
-            movie[key] = val;
+        if (key !== 'genre' || key !== 'director') // Temporary conditional
+        movie[key] = val;
     }
 
-    const status = document.querySelector('.status');
+    const status = document.querySelector('#watched');
     movie['watched'] = status.checked;
+    console.log(formData);
     movies.push(movie);
 }
 
-// Dummy data, may be temp or might keep it in
 movies[0] = new Movie('The Shawshank Redemption 1', 'Guy', '1942', 'Action', 'Test description', false);
 movies[1] = new Movie('The Shawshank Redemption 2', 'Guy', '1942', 'Action', 'Test description', false);
 movies[2] = new Movie('The Shawshank Redemption 3', 'Guy', '1942', 'Action', 'Test description', false);
@@ -120,11 +117,12 @@ function setState(movie, target) {
 }
 
 function clear(parent, movie) {
-    if (movie === undefined) {
-        for (const node of parent.children) {
-            parent.remove(node);
-        }
-        return;
+    if (movie === undefined && parent.children) {
+        // for (const node of parent.children) {
+        //     parent.remove(node);
+        // }
+        // return;
+        parent.innerHTML = ``;
     }
 
     Array.from(parent.children).forEach((node) => {
@@ -132,5 +130,25 @@ function clear(parent, movie) {
             parent.removeChild(node);
     });
 }
+
+function displayModal() {
+    document.querySelector('.overlay').style.display = `block`;
+}
+
+function closeModal() {
+    document.querySelector('.overlay').style.display = `none`;
+}
+
+const addBtn = document.querySelector('#add');
+const openBtn = document.querySelector('.btn-add');
+const closeBtn = document.querySelector('.close-btn');
+
+openBtn.addEventListener('click', displayModal);
+closeBtn.addEventListener('click', closeModal);
+addBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    addMovie(movies);
+    renderUI();
+});
 
 renderUI();

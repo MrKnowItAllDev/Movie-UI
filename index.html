@@ -12,6 +12,31 @@
 </head>
 <body>
     <section id="main">
+        <section class="overlay">
+            <dialog>
+                <section class="modal-header">
+                    <h2>Add Movie</h2>
+                    <button class="close-btn btn">Close</button>
+                </section>
+                <section class="form-section">
+                    <form>
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" />
+                        <label for="director">Director</label>
+                        <input type="text" id="director" name="director" />
+                        <label for="desc">Description</label>
+                        <textarea id="desc" name="desc"></textarea>
+                        <label for="year">Year</label>
+                        <input type="text" id="year" name="year" />
+                        <section>
+                            <label for="watched">Have you watched the movie?</label>
+                            <input type="checkbox" id="watched" name="watched" />
+                        </section>
+                        <button type="submit" id="add">Submit</button>
+                    </form>
+                </section>
+            </dialog>
+        </section>
         <section id="container">
             <section class="heading">
                 <h1>Movie App</h1>
@@ -20,9 +45,9 @@
             <section class="card-body">
                 <section class="body-title">
                     <h2>Popular Movies</h2>
+                    <button class="btn-add">Add Movie</button>
                 </section>
                 <section class="content">
-
                 </section>
             </section>
         </section>

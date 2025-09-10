@@ -34,8 +34,9 @@
 #container {
     background-color: var(--card-bg);
     border-radius: 16px;
+    margin-top: calc(100vh - 800px);
     padding: 16px;
-    width: 700px;
+    width: 800px;
 }
 
 #container > .heading {
@@ -55,6 +56,12 @@
     padding: 12px;
 }
 
+.body-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .content > .card {
     display: flex;
     border: 1px solid var(--card-border);
@@ -63,7 +70,7 @@
 }
 
 .card > img {
-    height: 200px;
+    height: auto;
 }
 
 .card-body > .body-title {
@@ -72,17 +79,18 @@
 }
 
 .content > .card > .card-info {
-    padding: 12px;
+    padding: 24px;
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: space-evenly;
+    gap: 12px;
     color: var(--body-text);
 }
 
 .card-info > h2 {
     font-weight: 600;
     font-size: 28px;
-    letter-spacing: 2px;
 }
 
 .card-info > .year {
@@ -120,7 +128,109 @@ input[type="search"] {
     background-color: #ff2525;
 }
 
+.btn-add {
+    padding: 8px;
+    background-color: #4a99ff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.btn-add:hover {
+    background-color: #1e81ff;
+    cursor: pointer;
+    color: #ffffff;
+}
+
 .btn-delete {
    background-color: rgb(43, 138, 232);
     color: #ffffff;
+}
+
+dialog {
+    display: grid;
+    padding: 24px;
+    border-radius: 8px;
+    width: 500px;
+    height: fit-content;
+    position: fixed;
+    top: calc(100vh / 4.5);
+    left: calc(100vw / 2.8);
+}
+
+dialog > .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+dialog > .modal-header > button {
+    border: none;
+    background-color: #E50914FF;
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+dialog > .modal-header > button:hover {
+    cursor: pointer;
+    background-color: #B20710FF;
+}
+
+dialog > .modal-header > h2 {
+    color: #000000;
+    font-size: 2rem;
+}
+
+dialog > .form-section > form {
+    display: grid;
+    gap: 24px;
+}
+
+dialog > .form-section > form > label {
+    color: #000000;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    border: none;
+    padding: 4px;
+    background-color: #f6f6f6;
+    border-radius: 8px;
+    color: #3c3c3c;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+form > section {
+    display: flex;
+    justify-content: start;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+form > section > input[type="checkbox"] {
+    height: 100%;
+}
+
+#add {
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #0D0D0D;
+    color: #D1E2FF;
+    font-size: 18px;
+}
+
+.overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.9);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
 }
