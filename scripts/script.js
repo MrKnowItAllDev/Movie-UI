@@ -2,7 +2,6 @@
 
 const watchedMovies = [];
 const unwatchedMovies = [];
-
 const movies = [];
 
 function Movie(title, director, year, genre, desc, watched) {
@@ -27,8 +26,8 @@ function addMovie(movies) {
 
     if (!submit) return;
 
-    for (const [key, val] of formData) {
-        if (key !== 'genre' || key !== 'director') // Temporary conditional
+    for (const [key, val] of formData) {// Temporary conditional
+        if (key !== 'genre' || key !== 'director')
         movie[key] = val;
     }
 
@@ -38,13 +37,13 @@ function addMovie(movies) {
     movies.push(movie);
 }
 
-movies[0] = new Movie('The Shawshank Redemption 1', 'Guy', '1942', 'Action', 'Test description', false);
-movies[1] = new Movie('The Shawshank Redemption 2', 'Guy', '1942', 'Action', 'Test description', false);
-movies[2] = new Movie('The Shawshank Redemption 3', 'Guy', '1942', 'Action', 'Test description', false);
-movies[3] = new Movie('The Shawshank Redemption 4', 'Guy', '1942', 'Action', 'Test description', false);
+movies[0] = new Movie('The Shawshank Redemption 1', 'Guy', '1995', 'Action', 'Test description', false);
+movies[1] = new Movie('Iron Man 2', 'Tony Stark', '2002', 'Action', 'Test description', true);
+movies[2] = new Movie('Thor Love and Thunder', 'Ben Affleck', '1982', 'Action', 'Test description', false);
+movies[3] = new Movie('Deadpool', 'Guy', '1999', 'Action', 'Test description', false);
+movies[4] = new Movie('The Simpsons', 'Gary Whiteman', '2004', 'Comedy',  'This is an animated series', true);
 
-// TODO: Attach event listeners to dialog DOM elements
-function renderUI() {
+function renderUI(movies) {
     const parent = document.querySelector('.content');
     clear(parent);
 
@@ -53,7 +52,6 @@ function renderUI() {
     }
 }
 
-// TODO: Add object state button element
 function createCard(parent, movie) {
     const card = document.createElement('section');
     const info = document.createElement('section');
@@ -102,6 +100,14 @@ function createCard(parent, movie) {
     card.appendChild(img);
     card.appendChild(info);
     parent.appendChild(card);
+
+    console.log(movie);
+}
+
+function getFilter(text, movies) {
+    return movies.filter((movie) => {
+        return movie.title.includes(text);
+    });
 }
 
 function setState(movie, target) {
@@ -118,11 +124,8 @@ function setState(movie, target) {
 
 function clear(parent, movie) {
     if (movie === undefined && parent.children) {
-        // for (const node of parent.children) {
-        //     parent.remove(node);
-        // }
-        // return;
         parent.innerHTML = ``;
+        return;
     }
 
     Array.from(parent.children).forEach((node) => {
@@ -142,13 +145,25 @@ function closeModal() {
 const addBtn = document.querySelector('#add');
 const openBtn = document.querySelector('.btn-add');
 const closeBtn = document.querySelector('.close-btn');
+const searchBar = document.querySelector('#search');
+
+let input = [];
+
+searchBar.addEventListener('input', (e) => {
+    if (e.inputType === 'insertText') input.push(e.data);
+    else if (e.inputType === 'deleteContentBackward') input.splice(-1, 1);
+
+    let outputData = input.join('').trim();
+    let filtered = getFilter(outputData, movies);
+    renderUI(filtered);
+});
 
 openBtn.addEventListener('click', displayModal);
 closeBtn.addEventListener('click', closeModal);
 addBtn.addEventListener('click', (e) => {
     e.preventDefault();
     addMovie(movies);
-    renderUI();
+    renderUI(movies);
 });
 
-renderUI();
+renderUI(movies);
