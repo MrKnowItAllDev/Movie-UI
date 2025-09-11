@@ -33,7 +33,6 @@ function addMovie(movies) {
 
     const status = document.querySelector('#watched');
     movie['watched'] = status.checked;
-    console.log(formData);
     movies.push(movie);
 }
 
@@ -49,6 +48,13 @@ function renderUI(movies) {
 
     for (const movie of movies) {
         createCard(parent, movie);
+    }
+
+    if (movies.length < 1) {
+        const empty = document.createElement('h2');
+        empty.setAttribute('style', 'color: #333333;');
+        empty.textContent = `Not Found!`;
+        document.querySelector('.content').appendChild(empty);
     }
 }
 
@@ -100,8 +106,6 @@ function createCard(parent, movie) {
     card.appendChild(img);
     card.appendChild(info);
     parent.appendChild(card);
-
-    console.log(movie);
 }
 
 function getFilter(text, movies) {
@@ -152,7 +156,6 @@ let input = [];
 searchBar.addEventListener('input', (e) => {
     if (e.inputType === 'insertText') input.push(e.data);
     else if (e.inputType === 'deleteContentBackward') input.splice(-1, 1);
-
     let outputData = input.join('').trim();
     let filtered = getFilter(outputData, movies);
     renderUI(filtered);
@@ -166,4 +169,7 @@ addBtn.addEventListener('click', (e) => {
     renderUI(movies);
 });
 
-renderUI(movies);
+window.onload = function() {
+    document.querySelector('#search').value = ``;
+    renderUI(movies);
+};
